@@ -1,0 +1,70 @@
+<?php
+require_once("redsox_utilities.inc");
+
+session_start();
+$user_id = $_SESSION['user_id'];
+$user_login = $_SESSION['user_login'];
+
+if (!is_admin($user_id)) {
+	echo "Only administrators may see the results by status.";
+} else {
+	$db = admin_db_connect();
+
+	$command = "SELECT YEAR(g.date) AS year FROM games g GROUP BY YEAR(g.date) ORDER BY g.date DESC;";
+	$year_result = mysql_query($command);
+
+	$years = array();
+	if ($year_result == false) {
+		$error_message = "Error getting years data: ".mysql_error();
+	} else {
+		while ($this_year = mysql_fetch_assoc($year_result)) {
+			array_push($years, $this_year['year']);
+		}
+	}
+
+	foreach ($years as $this_year) {
+		echo "<h2>".$this_year."</h2>";
+
+		for ($status = 0; $status <= 4; $status++) {
+			$command = "SELECT * FROM status WHERE id = ".$status.";";
+			$status_result = mysql_query($command);
+
+			if ($status_result == false) {
+				$error_message = "Error getting status data: ".$mysql_error();
+			} else {
+				$this_status = mysql_fetch_assoc($status_result);
+
+				$command = "SELECT g.gameID, g.date, ui.name, t.city, t.name as team_name, s.string AS status_text 
+					FROM games g 
+					JOIN user_info ui ON ui.user_id = g.soldto
+					JOIN teams t ON t.id = g.team_id 
+					JOIN status s ON s.id = g.status_id
+					WHERE g.status_id = ".addslashes($this_status['id'])." 
+					AND YEAR(g.date) = ".addslashes($this_year)." ORDER BY g.date ASC;";
+			
+				$games_result = mysql_query($command);
+
+				if ($games_result == false) {
+					$error_message = "Error getting status ".$status.": ".mysql_error();
+				} else {
+					echo "<table align='center'>\n";
+					echo "<th width='50'>Date</th><th width='200'>Team</th><th width='200'>SoldTo</th><th width='50'>Price</th>\n";
+					while ($game_data = mysql_fetch_assoc($status_result)) {
+						printf("<tr><td align='center'>%s</td><td align='center'>%s %s</td><td align='center'>%s</td><td align='center'>%s</td>\n", $game_data['date'], $game_data['city'], $game_data['team_name'], $game_data['name'], $game_data['price']);
+					}
+
+					echo "</table>\n";
+				}
+			}
+		}
+	}
+}
+
+if ($error_message) {
+	echo $error_message;
+}
+?>
+
+				
+
+
