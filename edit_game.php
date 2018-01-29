@@ -196,7 +196,7 @@ if (is_numeric($game_id)) {
 		</td></tr>
 		</table>
 		</form>
-<?
+<?php
 	}
 } else {
 	$error_message = "Bad gameID value.";

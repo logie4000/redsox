@@ -46,11 +46,11 @@ include("redsox_title.php");
 if ($error_message) { 
 ?>
 <span style='font-size:10px;color:red;'><?php echo $error_message; ?></span>
-<?
+<?php
 } else if ($status_message) {
 ?>
 <span style='font-size:10px;color:black;'><?php echo $status_message; ?></span>
-<?
+<?php
 }
 ?>
 

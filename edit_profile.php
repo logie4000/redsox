@@ -113,7 +113,7 @@ include ("redsox_title.php");
 <tr><td align='right'>Address 2:</td><td align='left'><input type='text' name='address2' value='<?php echo $address2; ?>' max='50' size='30'></td></tr>
 <tr><td align='right'>City:</td><td align='left'><input type='text' name='city' value='<?php echo $city; ?>' max='50' size='30'></td></tr>
 <tr><td align='right'>State:</td><td align='left'><select name='state'>
-<?
+<?php
 	echo "<option value=''".($state == '' ? ' selected=\'selected\'' : '').">Select a state</option>\n";
 
 	$command = "SELECT abbrev, name FROM states;";
