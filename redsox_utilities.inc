@@ -1,5 +1,5 @@
 <?php
-require_once("secrets.inc");
+require_once("/var/www/secrets.inc");
 
 function db_connect($host, $user, $pw, $database) {
 	if (!($host && $user && $pw && $database)) {
