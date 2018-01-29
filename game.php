@@ -2,13 +2,9 @@
 
 require("redsox_utilities.inc");
 
-session_start();
-$user_id = "";
-if (array_key_exists('user_id', $_SESSION)) {
-	$user_id = $_SESSION['user_id'];
-}
+include ("session_vars.inc");
 
-$game_id = $_GET['gameID'];
+$game_id = get_var('gameID');
 $error_message = "";
 
 if (is_numeric($game_id)) {

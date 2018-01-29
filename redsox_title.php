@@ -1,24 +1,12 @@
 <?php
 require_once ("redsox_utilities.inc");
 
-session_start();
+include ("session_vars.inc");
 
-$user_id = "";
-$user_login = "";
-if (array_key_exists('user_id', $_SESSION)) {
-	$user_id = $_SESSION['user_id'];
-}
-if (array_key_exists('user_login', $_SESSION)) {
-	$user_login = $_SESSION['user_login'];
-}
-
-$year = "";
+$year = get_year();
 
 $dateNow = getdate();
 $thisYear = $dateNow['year'];
-if ($_GET && array_key_exists('year', $_GET) && is_numeric($_GET['year'])) {
-	$year = $_GET['year'];
-}
 if ($year == "") $year = $thisYear;
 
 $title = $year;

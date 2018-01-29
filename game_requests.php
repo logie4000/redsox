@@ -2,11 +2,9 @@
 
 include("redsox_utilities.inc");
 
-session_start();
-$user_id = $_SESSION['user_id'];
-$user_login = $_SESSION['user_login'];
+include ("session_vars.inc");
 
-$game_id = $_GET['gameID'];
+$game_id = get_var('gameID');
 
 if (!is_admin($user_id)) {
 	echo "Only administrators are allowed to view game requests.";

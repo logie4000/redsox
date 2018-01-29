@@ -1,9 +1,7 @@
 <?php
 require_once("redsox_utilities.inc");
 
-session_start();
-$user_id = $_SESSION['user_id'];
-$user_login = $_SESSION['user_login'];
+include ("session_vars.inc");
 
 if (is_numeric($user_id)) {
 	$db = login_db_connect();

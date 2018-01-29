@@ -1,7 +1,7 @@
 <?php
 $dateNow = getDate();
 $thisYear = $dateNow['year'];
-$year = $_GET['year'];
+$year = $get_year();
 if ($year == "") $year = $thisYear;
 
 echo ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\">\n");
@@ -25,3 +25,4 @@ echo "</div>\n\n";
 
 echo "</body>\n";
 echo "</html>\n";
+?>

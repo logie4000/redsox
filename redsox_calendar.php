@@ -1,9 +1,7 @@
 <?php
 require_once("redsox_utilities.inc");
 
-session_start();
-$user_id = $_SESSION['user_id'];
-$user_login = $_SESSION['user_login'];
+include ("session_vars.inc");
 
 // Make a MySQL Connection
 if (is_numeric($user_id)) {
@@ -63,9 +61,8 @@ tr {font-family: "Arial", "Helvetica", "Sans Serif"; font-size: 12}
 <?php
 $dateNow = getDate();
 $nowYear = $dateNow['year'];
-if($_GET['year'] && is_numeric($_GET['year'])) {
-	$y = $_GET['year'];
-} else {
+$y = get_var('year');
+if(!is_numeric($y)) {
 	$y = "";
 }
 

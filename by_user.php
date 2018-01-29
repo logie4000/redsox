@@ -1,15 +1,9 @@
 <?php
 require_once("redsox_utilities.inc");
 
-session_start();
-$user_id = $_SESSION['user_id'];
-$user_login = $_SESSION['user_login'];
+include ("session_vars.inc");
 
-if ($_GET['year']) {
-	$year = $_GET['year'];
-} else {
-	$year = date('Y', time());
-}
+$year = get_year();
 $pageTitle = "By User";
 include("redsox_title.php");
 

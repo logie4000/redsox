@@ -1,15 +1,12 @@
 <?php
 require_once("redsox_utilities.inc");
 
-session_start();
-$user_id = $_SESSION['user_id'];
-$user_login = $_SESSION['user_login'];
+include ("session_vars.inc");
 $db = member_db_connect();
 
 if (is_admin($user_id)) {
-	if (array_key_exists('profileID', $_GET) && is_numeric($_GET['profileID'])) {
-		$profile_id = $_GET['profileID'];
-	} else {
+	$profile_id = get_var('profileID');
+	if (!is_numeric($profile_id)) {
 		$profile_id = $user_id;
 	}
 } else {

@@ -2,13 +2,11 @@
 
 require_once("redsox_utilities.inc");
 
-session_start();
-$user_id = $_SESSION['user_id'];
-$user_login = $_SESSION['user_login'];
+include ("session_vars.inc");
 
-$mygames_table = 'sold';
-if ($_GET['mode']) {
-	$mygames_table = $_GET['mode'];
+$mygames_table = get_var('mode');
+if ($mygames_table == "") {
+	$mygames_table = 'sold';
 }
 
 include("redsox_title.php");

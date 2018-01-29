@@ -1,20 +1,13 @@
 <?php
 require_once("redsox_utilities.inc");
 
-session_start();
-$user_id = $_SESSION['user_id'];
-$user_login = $_SESSION['user_login'];
+include ("session_vars.inc");
 
-if (is_numeric($_GET['year'])) {
-	$year = $_GET['year'];
-} else {
-	$year = date('Y', time());
-}
-
+$year = get_year();
 $pageTitle = "By Status";
-
-if (is_numeric($_GET['profileID'])) {
-	$profile_id = $_GET['profileID'];
+$profile_id = get_var('profileID');
+if ( !is_numeric($profile_id) ) {
+	$profile_id = "";
 }
 
 include("redsox_title.php");

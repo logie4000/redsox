@@ -1,9 +1,7 @@
 <?php
 require_once("redsox_utilities.inc");
 
-session_start();
-$_SESSION['user_id'] = '';
-$_SESSION['user_login'] = '';
+include ("session_vars.inc");
 
 
 if ($_POST && count($_POST) > 0) {

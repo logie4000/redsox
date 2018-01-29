@@ -2,19 +2,17 @@
 
 require("redsox_utilities.inc");
 
-session_start();
-
-$user_id = $_SESSION['user_id'];
-$user_login = $_SESSION['user_login'];
-$game_id = $_GET['gameID'];
+include ("session_vars.inc");
+$game_id = get_var('gameID');
 
 if (!is_numeric($user_id)) {
-	$_SESSION['referal'] = $_SERVER['REQUEST_URI'];
+	$request_id = get_session_var('REQUEST_URI');
+	$_SESSION['referal'] = $request_id;
 	header("Location: login.php");
 }
 
 if (!$game_id && $_POST) {
-	$game_id = $_POST['gameID'];
+	$game_id = post_var('gameID');
 }
 
 if (is_numeric($game_id)) {

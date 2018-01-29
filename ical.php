@@ -4,7 +4,7 @@ require("redsox_utilities.inc");
 
 session_start();
 
-$game_id = $_GET['gameID'];
+$game_id = get_var('gameID');
 
 if (is_numeric($game_id))
 {

@@ -303,4 +303,62 @@ function mark_reserved($game_id, $user_id, $db) {
                 echo "Game id is invalid: ".$game_id;
         }
 }	
+
+function get_hash_value($hash, $key) {
+	if ($hash == null) {
+		return null;
+	}
+	
+	$value = "";
+	if (array_key_exists($key, $hash)) {
+		$value = $hash[$key];
+	}
+	
+	return $value;	
+}
+
+function get_session_value($key) {
+	if ($key == null || $key == "") {
+		return "";
+	}
+	
+	$value = get_hash_value($_SESSION, $key);
+	return $value;
+}
+
+function get_var($key) {
+	if ($key == null || $key == "") {
+		return "";
+	}
+	
+	if ($_GET == null) {
+		return "";
+	}
+	
+	$value = get_hash_value($_GET, $key);
+	return $value;
+}
+
+function post_var($key) {
+	if ($key == null || $key == "") {
+		return "";
+	}
+
+	if ($_POST == null) {
+		return "";
+	}
+	
+	$value = get_hash_value($_POST, $key);
+	return $value;
+}
+
+function get_year() {
+	$year = get_var('year');
+	if (!is_numeric($year)) {
+		$year = date('Y', time());
+	}
+	
+	return $year;
+}
+
 ?>
